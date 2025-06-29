@@ -1,0 +1,60 @@
+<Window x:Class="TicketApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Секция управления клиентами -->
+        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+            <TextBlock Text="ФИО клиента:"/>
+            <TextBox x:Name="tbClientName" Margin="0,0,0,5"/>
+            <TextBlock Text="Телефон:"/>
+            <TextBox x:Name="tbClientPhone" Margin="0,0,0,5"/>
+            <TextBlock Text="Email:"/>
+            <TextBox x:Name="tbClientEmail" Margin="0,0,0,5"/>
+            <Button Content="Добавить клиента" Click="AddClient_Click" Margin="0,5,0,5"/>
+            <Button Content="Удалить клиента" Click="DeleteClient_Click" Margin="0,0,0,20"/>
+            <DataGrid x:Name="dgClients" Height="200" AutoGenerateColumns="False" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40"/>
+                    <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="*"/>
+                    <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="*"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <!-- Секция записи на услугу и истории -->
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="Клиент:"/>
+            <ComboBox x:Name="cbClient" Margin="0,0,0,5"/>
+            <TextBlock Text="Услуга:"/>
+            <ComboBox x:Name="cbService" Margin="0,0,0,5"/>
+            <TextBlock Text="Дата посещения:"/>
+            <DatePicker x:Name="dpDate" Margin="0,0,0,5"/>
+            <Button Content="Записать на услугу" Click="AddAppt_Click" Margin="0,5,0,20"/>
+
+            <DataGrid x:Name="dgAppts" AutoGenerateColumns="False" Height="200">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40"/>
+                    <DataGridTextColumn Header="Клиент" Binding="{Binding ClientName}" Width="*"/>
+                    <DataGridTextColumn Header="Услуга" Binding="{Binding ServiceName}" Width="*"/>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding ApptDate}" Width="*"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="Новый статус:" Margin="0,10,0,0"/>
+            <ComboBox x:Name="cbStatus" Margin="0,0,0,5">
+                <ComboBoxItem>запланирована</ComboBoxItem>
+                <ComboBoxItem>выполнена</ComboBoxItem>
+                <ComboBoxItem>отменена</ComboBoxItem>
+            </ComboBox>
+            <Button Content="Обновить статус" Click="UpdateApptStatus_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
