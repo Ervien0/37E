@@ -1,0 +1,48 @@
+<Window x:Class="TicketApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TicketApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+            <TextBox x:Name="tbClient" Width="150" Margin="0,0,10,0"/>
+            <ComboBox x:Name="cbType" Width="150" Margin="0,0,10,0">
+                <ComboBoxItem>Ремонт</ComboBoxItem>
+                <ComboBoxItem>Установка ПО</ComboBoxItem>
+                <ComboBoxItem>Консультация</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="tbDesc" Width="300" Margin="0,0,10,0"/>
+            <Button Content="Добавить" Click="Add_Click"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dgRequests" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Клиент" Binding="{Binding ClientName}" Width="150"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding RequestType}" Width="150"/>
+                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="*"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="100"/>
+                <DataGridTextColumn Header="Создано" Binding="{Binding CreatedAt}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0">
+            <ComboBox x:Name="cbStatus" Width="150" Margin="0,0,10,0">
+                <ComboBoxItem>новая</ComboBoxItem>
+                <ComboBoxItem>в работе</ComboBoxItem>
+                <ComboBoxItem>выполнена</ComboBoxItem>
+            </ComboBox>
+            <Button Content="Обновить статус" Click="UpdateStatus_Click"/>
+            <Button Content="Удалить" Click="Delete_Click" Margin="10,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
